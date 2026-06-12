@@ -1,0 +1,29 @@
+# secrets — NEVER commit
+.env
+
+# real malware samples — do NOT commit to GitHub (policy + safety).
+# Re-download with: python analysis/fetch_real_samples.py  (needs MWB_API_KEY)
+data/samples/real_encrypted/
+
+# generated runtime data / caches (persist locally, not in the repo)
+outputs/scans/
+outputs/ti_cache/
+outputs/dyn_cache/
+outputs/_upload_cache/
+outputs/real_sample_results.json
+
+# python / tooling
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# downloaded binaries (jadx ~100MB) — fetched on demand
+tools/bin/
+
+# test artifacts
+analysis/_shots_apk/
+analysis/_shots/
+
+# a Topic-2 (mule) dashboard that got dropped into this folder by mistake —
+# it belongs with the ../mule project, not the APK repo
+Security Dashboard UI/

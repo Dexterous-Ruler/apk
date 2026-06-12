@@ -1,0 +1,22 @@
+# APKSHIELD — Topic 1 (fraudulent APK analysis). Python 3.10+
+# Static analysis + reverse engineering
+androguard>=4.1.4
+apkid>=3.1.0
+# ML
+scikit-learn>=1.3
+lightgbm>=4.0
+xgboost>=2.0
+pandas>=2.0
+numpy>=1.24
+joblib>=1.3
+# Impersonation layer
+thefuzz>=0.22
+imagehash>=4.3
+pillow>=10.0
+# GenAI report + reverse-engineering layers (Claude)
+anthropic>=0.40
+# Real-sample handling (decrypt password-protected zips in memory)
+pyzipper>=0.3
+# Web backend
+flask>=3.0
+# (threat intel + dynamic sandbox use only the Python stdlib urllib)

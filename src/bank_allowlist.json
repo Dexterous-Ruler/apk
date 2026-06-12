@@ -1,0 +1,34 @@
+{
+  "_comment": "Official Indian banking/UPI app identity allowlist. cert_sha256/icon_phash are pinned from official APKs when available (null = not yet pinned; matching then relies on package/name/typosquat signals and reports identity as unverifiable rather than mismatched).",
+  "apps": [
+    {"bank": "State Bank of India", "app_names": ["YONO SBI", "YONO"], "package": "com.sbi.lotusintouch", "cert_sha256": null, "icon_phash": null},
+    {"bank": "State Bank of India", "app_names": ["YONO Lite SBI", "SBI Anywhere"], "package": "com.sbi.SBIFreedomPlus", "cert_sha256": null, "icon_phash": null},
+    {"bank": "ICICI Bank", "app_names": ["iMobile Pay", "iMobile"], "package": "com.csam.icici.bank.imobile", "cert_sha256": null, "icon_phash": null},
+    {"bank": "HDFC Bank", "app_names": ["HDFC Bank MobileBanking", "HDFC Bank"], "package": "com.snapwork.hdfc", "cert_sha256": null, "icon_phash": null},
+    {"bank": "Axis Bank", "app_names": ["Axis Mobile", "open by Axis Bank"], "package": "com.axis.mobile", "cert_sha256": null, "icon_phash": null},
+    {"bank": "Kotak Mahindra Bank", "app_names": ["Kotak811", "Kotak Mobile Banking"], "package": "com.msf.kbank.mobile", "cert_sha256": null, "icon_phash": null},
+    {"bank": "Punjab National Bank", "app_names": ["PNB ONE"], "package": "com.Version1", "cert_sha256": null, "icon_phash": null},
+    {"bank": "Bank of Baroda", "app_names": ["bob World"], "package": "com.bankofbaroda.mconnect", "cert_sha256": null, "icon_phash": null},
+    {"bank": "Canara Bank", "app_names": ["Canara ai1"], "package": "com.canarabank.mobility", "cert_sha256": null, "icon_phash": null},
+    {"bank": "NPCI", "app_names": ["BHIM"], "package": "in.org.npci.upiapp", "cert_sha256": null, "icon_phash": null},
+    {"bank": "PhonePe", "app_names": ["PhonePe"], "package": "com.phonepe.app", "cert_sha256": null, "icon_phash": null},
+    {"bank": "Google", "app_names": ["Google Pay", "GPay"], "package": "com.google.android.apps.nbu.paisa.user", "cert_sha256": null, "icon_phash": null},
+    {"bank": "Paytm", "app_names": ["Paytm"], "package": "net.one97.paytm", "cert_sha256": null, "icon_phash": null},
+    {"bank": "IndusInd Bank", "app_names": ["IndusMobile", "INDIE"], "package": "com.fss.indus", "cert_sha256": null, "icon_phash": null},
+    {"bank": "IDFC FIRST Bank", "app_names": ["IDFC FIRST Bank"], "package": "com.idfcfirstbank.optimus", "cert_sha256": null, "icon_phash": null},
+    {"bank": "Union Bank of India", "app_names": ["Vyom"], "package": "com.unionbank.ecommerce", "cert_sha256": null, "icon_phash": null},
+    {"bank": "Federal Bank", "app_names": ["FedMobile"], "package": "com.fedmobile", "cert_sha256": null, "icon_phash": null},
+    {"bank": "WhatsApp (common lure)", "app_names": ["WhatsApp"], "package": "com.whatsapp", "cert_sha256": null, "icon_phash": null}
+  ],
+  "bank_keywords": [
+    "sbi", "yono", "icici", "imobile", "hdfc", "axis", "kotak", "pnb",
+    "baroda", "bob", "canara", "union", "indusind", "idfc", "federal",
+    "yesbank", "rbl", "bandhan", "upi", "bhim", "phonepe", "paytm", "gpay",
+    "googlepay", "netbanking", "bank"
+  ],
+  "lure_keywords": [
+    "kyc", "refund", "reward", "rewardz", "cashback", "verify", "update",
+    "support", "helpline", "loan", "credit", "points", "bonus", "prize",
+    "lottery", "gift"
+  ]
+}

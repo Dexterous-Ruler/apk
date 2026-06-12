@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>APKSHIELD — Fraudulent APK Forensics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="scanline" aria-hidden="true"></div>
+
+<!-- ░░ TOP BAR ░░ -->
+<header class="topbar">
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <path d="M20 2.5 L34 8.5 V20 C34 29 28 35 20 37.5 C12 35 6 29 6 20 V8.5 Z"
+            stroke="currentColor" stroke-width="1.6" opacity=".85"/>
+      <path d="M13 19.5 L18 24.5 L27 14.5" stroke="currentColor" stroke-width="2.1"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M6 14 H34" stroke="currentColor" stroke-width="1" opacity=".35"/>
+    </svg>
+    <div class="brand-text">
+      <b>APKSHIELD</b><span>fraudulent apk forensics · topic 1</span>
+    </div>
+  </div>
+  <div class="topbar-spacer"></div>
+  <div class="pills" id="statusPills"></div>
+</header>
+
+<main class="shell">
+  <div class="layout">
+    <!-- ░░ MAIN COLUMN ░░ -->
+    <section class="main">
+      <!-- upload -->
+      <div class="card" id="uploadCard">
+        <div class="card-b">
+          <div class="drop" id="drop">
+            <svg class="scan-ico" viewBox="0 0 48 48" fill="none">
+              <rect x="8" y="6" width="22" height="36" rx="3" stroke="currentColor" stroke-width="2"/>
+              <path d="M14 14 H24 M14 20 H24 M14 26 H20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <circle cx="33" cy="30" r="9" stroke="currentColor" stroke-width="2"/>
+              <path d="M39.5 36.5 L44 41" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+            <h2>Drop a suspicious APK</h2>
+            <p>Static + ML + impersonation + GenAI investigation report — no install, no execution.</p>
+            <input type="file" id="file" accept=".apk" hidden>
+            <button class="btn" id="browse">Select APK file</button>
+            <div class="samples" id="samples"></div>
+          </div>
+          <div class="progress" id="progress">
+            <div class="stage" data-st="static"><span class="s-dot"></span> Static analysis — manifest, certificate, dex, APKiD</div>
+            <div class="stage" data-st="ml"><span class="s-dot"></span> ML risk model — Drebin-215 classifier</div>
+            <div class="stage" data-st="imp"><span class="s-dot"></span> Impersonation check — bank identity & cert</div>
+            <div class="stage" data-st="genai"><span class="s-dot"></span> GenAI report — verdict, MITRE ATT&CK, grounding</div>
+            <div class="stage" data-st="ti"><span class="s-dot"></span> Threat intel — VirusTotal / MalwareBazaar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- results -->
+      <div id="results" class="hidden">
+        <div class="card">
+          <div class="card-h"><h3>Verdict</h3><span class="k" id="vFile">—</span></div>
+          <div class="card-b">
+            <div class="verdict">
+              <div class="gauge-wrap">
+                <div class="gauge">
+                  <svg width="200" height="200" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="86" fill="none" stroke="#1e2a3b" stroke-width="14"/>
+                    <circle id="gaugeArc" cx="100" cy="100" r="86" fill="none" stroke="#2ad4ee"
+                            stroke-width="14" stroke-linecap="round"
+                            stroke-dasharray="540.4" stroke-dashoffset="540.4"/>
+                  </svg>
+                  <div class="gauge-num"><b id="gScore">0</b><small>risk / 100</small></div>
+                </div>
+                <span class="sev-badge" id="sevBadge">—</span>
+              </div>
+              <div>
+                <div class="idline">
+                  <span class="noicon" id="vIcon">▤</span>
+                  <div>
+                    <div class="nm" id="vName">—</div>
+                    <div class="pk" id="vPkg">—</div>
+                  </div>
+                </div>
+                <div class="verdict-label" id="vLabel">—</div>
+                <div class="layers" id="vLayers"></div>
+              </div>
+            </div>
+
+            <div class="tabs" id="tabs"></div>
+            <div id="panels"></div>
+          </div>
+        </div>
+
+        <!-- deep analysis (reverse engineering + dynamic) -->
+        <div class="card" id="deepCard">
+          <div class="card-h">
+            <h3>Deep analysis — reverse engineering &amp; dynamic</h3>
+            <span class="k" id="deepStatus">on demand</span>
+          </div>
+          <div class="card-b">
+            <div id="deepIntro">
+              <p class="muted" style="margin-top:0">
+                Decompile the bytecode → <b style="color:var(--signal)">Claude reverse-engineers
+                the actual code</b>, trace <b style="color:var(--violet)">behavioral data-flows</b>
+                (SMS→network = OTP exfil), and pull <b style="color:var(--s-high)">real sandbox
+                runtime behavior</b> (detonation C2, dropped payloads). ~20–60s.
+              </p>
+              <button class="btn" id="runDeep">Run deep analysis</button>
+            </div>
+            <div class="progress" id="deepProgress">
+              <div class="stage" data-st="behav"><span class="s-dot"></span> Building cross-reference graph + behavioral data-flow</div>
+              <div class="stage" data-st="re"><span class="s-dot"></span> GenAI reverse engineering — reading decompiled code</div>
+              <div class="stage" data-st="dyn"><span class="s-dot"></span> Dynamic — sandbox detonation behavior</div>
+            </div>
+            <div class="tabs hidden" id="deepTabs"></div>
+            <div id="deepPanels"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ SIDEBAR ░░ -->
+    <aside class="side">
+      <div class="card">
+        <div class="card-h"><h3>Scan history</h3>
+          <button class="clear-btn" id="clearHist" title="Delete all saved records">Clear</button>
+        </div>
+        <div class="card-b">
+          <div class="hist" id="hist"><div class="empty">No scans yet.</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-h"><h3>How it scores</h3></div>
+        <div class="card-b">
+          <div class="note">
+            Risk fuses three layers: <b style="color:var(--signal)">ML</b> (Drebin-215 malware
+            probability), <b style="color:var(--s-high)">impersonation</b> (typosquat + bank
+            cert/package mimicry), and <b style="color:var(--violet)">static combos</b>
+            (accessibility+overlay+SMS = the SOVA/Anubis OTP-theft pattern).
+            GenAI writes the analyst report and is grounded against the extracted evidence —
+            invented IOCs are caught and stripped.
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

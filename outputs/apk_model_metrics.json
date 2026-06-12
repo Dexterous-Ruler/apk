@@ -1,0 +1,152 @@
+{
+  "trained_at": "2026-06-11 22:11:56",
+  "dataset": {
+    "file": "drebin215.csv",
+    "n_rows": 15036,
+    "n_features": 215,
+    "n_malware": 5560,
+    "n_benign": 9476,
+    "n_duplicate_vectors": 7779,
+    "duplicate_share": 0.5174,
+    "source": "Drebin-215 public mirror (5,560 malware / 9,476 benign)"
+  },
+  "cv": "StratifiedGroupKFold(5) grouping identical feature vectors (duplicate-leak-safe)",
+  "models": {
+    "random_forest": {
+      "roc_auc": 0.9964,
+      "pr_auc": 0.9951,
+      "operating_point": {
+        "threshold": 0.405,
+        "criterion": "max-F1 on OOF",
+        "confusion": {
+          "tn": 9386,
+          "fp": 90,
+          "fn": 184,
+          "tp": 5376
+        },
+        "precision_raw": 0.9835,
+        "recall_tpr": 0.9669,
+        "fpr": 0.0095,
+        "f1_raw": 0.9751,
+        "precision_at_10pct_prevalence": 0.9188
+      },
+      "dataset_malware_share": 0.3698,
+      "realistic_prior_used": 0.1,
+      "cv_seconds": 31.2
+    },
+    "xgboost": {
+      "roc_auc": 0.9977,
+      "pr_auc": 0.9965,
+      "operating_point": {
+        "threshold": 0.3883,
+        "criterion": "max-F1 on OOF",
+        "confusion": {
+          "tn": 9382,
+          "fp": 94,
+          "fn": 161,
+          "tp": 5399
+        },
+        "precision_raw": 0.9829,
+        "recall_tpr": 0.971,
+        "fpr": 0.0099,
+        "f1_raw": 0.9769,
+        "precision_at_10pct_prevalence": 0.9158
+      },
+      "dataset_malware_share": 0.3698,
+      "realistic_prior_used": 0.1,
+      "cv_seconds": 348.7
+    },
+    "lightgbm": {
+      "roc_auc": 0.9978,
+      "pr_auc": 0.9967,
+      "operating_point": {
+        "threshold": 0.3073,
+        "criterion": "max-F1 on OOF",
+        "confusion": {
+          "tn": 9393,
+          "fp": 83,
+          "fn": 178,
+          "tp": 5382
+        },
+        "precision_raw": 0.9848,
+        "recall_tpr": 0.968,
+        "fpr": 0.0088,
+        "f1_raw": 0.9763,
+        "precision_at_10pct_prevalence": 0.9247
+      },
+      "dataset_malware_share": 0.3698,
+      "realistic_prior_used": 0.1,
+      "cv_seconds": 110.1
+    }
+  },
+  "selected_model": "lightgbm",
+  "top_features": [
+    {
+      "feature": "WRITE_EXTERNAL_STORAGE",
+      "importance": 1224
+    },
+    {
+      "feature": "android.content.pm.PackageInfo",
+      "importance": 1066
+    },
+    {
+      "feature": "Ljava.lang.Object.getClass",
+      "importance": 991
+    },
+    {
+      "feature": "READ_PHONE_STATE",
+      "importance": 965
+    },
+    {
+      "feature": "INTERNET",
+      "importance": 965
+    },
+    {
+      "feature": "ACCESS_NETWORK_STATE",
+      "importance": 868
+    },
+    {
+      "feature": "TelephonyManager.getDeviceId",
+      "importance": 750
+    },
+    {
+      "feature": "onBind",
+      "importance": 689
+    },
+    {
+      "feature": "HttpGet.init",
+      "importance": 670
+    },
+    {
+      "feature": "HttpUriRequest",
+      "importance": 643
+    },
+    {
+      "feature": "mount",
+      "importance": 640
+    },
+    {
+      "feature": "Binder",
+      "importance": 639
+    },
+    {
+      "feature": "ACCESS_WIFI_STATE",
+      "importance": 623
+    },
+    {
+      "feature": "android.intent.action.BOOT_COMPLETED",
+      "importance": 580
+    },
+    {
+      "feature": "WAKE_LOCK",
+      "importance": 567
+    }
+  ],
+  "limitations": [
+    "The dataset has 7779 duplicate 215-d vectors (52%) from repacked/near-duplicate apps. We cross-validate with StratifiedGroupKFold so duplicates never straddle the split \u2014 these are honest dedup-safe numbers, not the inflated random-split figure.",
+    "No time-aware (TESSERACT) split possible: the public CSV has no timestamps. Even dedup-safe numbers overstate robustness to concept drift; treat them as upper bounds.",
+    "Live extraction approximates the original (unpublished) Drebin feature extractor; cross-checked on known samples but not bit-identical.",
+    "Dataset era is older than current banking trojans; the impersonation + red-flag layers exist precisely because the ML model alone cannot carry current-threat coverage.",
+    "Precision is also reported prior-shifted to 10% malware prevalence; the raw dataset is 37% malware which inflates naive precision."
+  ]
+}

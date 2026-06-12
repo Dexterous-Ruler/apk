@@ -1,0 +1,6 @@
+# Normalize line endings across OS (judges may be on Linux/Colab/Mac)
+* text=auto eol=lf
+*.png binary
+*.joblib binary
+*.apk binary
+*.csv text
