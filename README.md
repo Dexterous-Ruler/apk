@@ -1,8 +1,20 @@
-# 📱 APK Fraud Analyzer (Topic 1 / Problem Statement 1)
+# 📱 APKSHIELD — GenAI Fraudulent-APK Forensics & Risk Scoring
 
-**Scope of this folder: ONLY problem statement 1** — *Generative AI-Based Automated
-Analysis and Risk Scoring of Fraudulent APKs*. Nothing related to Topic 2 (mule
-accounts) lives here; that is in `../mule/`.
+### ▶ Try it live — no install, one click on Google Colab
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Dexterous-Ruler/apk/blob/main/APKShield_Colab.ipynb)
+
+**Live dashboard:** https://colab.research.google.com/github/Dexterous-Ruler/apk/blob/main/APKShield_Colab.ipynb
+
+> Open the notebook → **Runtime → Run all** → click the URL it prints. Then upload an APK
+> (or click a bundled sample) for an instant risk score, and **"Run deep analysis"** for the
+> GenAI reverse-engineering + dynamic-sandbox showcase. Runs offline (template mode) or at full
+> power with free API keys. Setup details: [HOW_TO_RUN.md](HOW_TO_RUN.md) · pitch content: [SOLUTION_APPROACH.md](SOLUTION_APPROACH.md)
+
+---
+
+*Generative AI-Based Automated Analysis and Risk Scoring of Fraudulent APKs — static + dynamic
++ reverse engineering + risk scoring, with GenAI doing the interpretive heavy lifting.*
 
 ## Problem statement (as given in `../Topic.pdf`)
 Fraudsters distribute malicious APKs via WhatsApp/SMS/email/phishing to steal
